@@ -1,25 +1,45 @@
-from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template , render_template, url_for , request, redirect
+
+
 app = Flask(__name__)
 
+# Routing de toutes les pages HTML pour que l'application puisse nous rediriger sur les bonnes pages depuis le site
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
-   print('Request for index page received')
-   return render_template('index.html')
+    return render_template('index.html')
 
+@app.route('/Contact', methods=['POST', 'GET'])
+def contact():
+    return render_template('Contact.html')
 
-@app.route('/hello', methods=['POST'])
-def hello():
-   name = request.form.get('name')
+@app.route('/Qui nous sommes', methods=['POST', 'GET'])
+def quiNousSommes():
+    return render_template('Qui nous sommes.html')
 
-   if name:
-       print('Request for hello page received with name=%s' % name)
-       return render_template('hello.html', name = name)
-   else:
-       print('Request for hello page received with no name or blank name -- redirecting')
-       return redirect(url_for('index'))
+@app.route('/FAQ', methods=['POST', 'GET'])
+def faq():
+    return render_template('FAQ.html')    
 
+@app.route('/Nos solutions', methods=['POST', 'GET'])
+def nosSolutions():
+    return render_template('Nos solutions.html') 
 
-if __name__ == '__main__':
-   app.run()
+@app.route('/Nos offres', methods=['POST', 'GET'])
+def nosOffres():
+    return render_template('Nos offres.html')
+
+@app.route('/page docteur', methods=['POST', 'GET'])
+def docteur():
+    return render_template('page docteur.html')
+
+@app.route('/page essential', methods=['POST', 'GET'])
+def essential():
+    return render_template('page essential.html')
+
+@app.route('/page pharmacy', methods=['POST', 'GET'])
+def pharmacy():
+    return render_template('page pharmacy.html')    
+
+if __name__ == "__main__":
+    app.run(debug=True)
